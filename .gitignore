@@ -1,0 +1,132 @@
+# =============================================================================
+# Claude Code: Up and Running — examples repo
+# =============================================================================
+# This repo holds a mix of browser JS (lyrics-trainer), Python/Flask
+# (weather-app), and MockHub-related skills/scripts. The .gitignore covers
+# all three plus the usual OS/editor noise.
+# =============================================================================
+
+# ---- OS ---------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---- Editors / IDEs ---------------------------------------------------------
+.idea/
+*.iml
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+*.swp
+*.swo
+*~
+.netrwhist
+
+# ---- Secrets and local config -----------------------------------------------
+# Never commit real keys. Track *.example files so readers know what to set.
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+secrets/
+credentials.json
+
+# ---- Python (weather-app, possibly scripts) ---------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+*.egg-info/
+*.egg
+pip-log.txt
+pip-delete-this-directory.txt
+.python-version
+
+# ---- Node / TypeScript (lyrics-trainer tests, MockHub React, MCP, tooling) --
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm/
+.yarn/
+.pnp.*
+.eslintcache
+
+# ---- JS/TS test + bundler artifacts (Vitest/Jest, Vite, Next, Parcel) -------
+coverage/
+*.lcov
+.vite/
+.next/
+.nuxt/
+.parcel-cache/
+.turbo/
+
+# ---- Java / Gradle (MockHub backend) ----------------------------------------
+# Build outputs and IDE cruft. NOTE: gradle-wrapper.jar MUST be committed —
+# the negation below keeps it tracked despite the broad *.jar ignore.
+.gradle/
+**/build/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+.gradletasknamecache
+# Negations MUST come after the broader ignores above — later rules win.
+!gradle/wrapper/gradle-wrapper.jar
+
+# ---- Spring Boot local overrides --------------------------------------------
+# Track committed application.{yml,properties}, ignore *-local.* variants
+# readers may create for local-only config.
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# ---- Build / dist artifacts -------------------------------------------------
+dist/
+out/
+*.tsbuildinfo
+
+# ---- Logs and temp files ----------------------------------------------------
+*.log
+logs/
+tmp/
+temp/
+.cache/
+
+# ---- Claude Code per-user state ---------------------------------------------
+# Keep shared .claude/ assets (skills, agents, commands, settings.json) tracked,
+# but exclude anything that's per-user or session-local.
+.claude/settings.local.json
+.claude/.session/
+.claude/logs/
+
+# ---- Transcripts: untrusted raw captures ------------------------------------
+# Track redacted transcripts under transcripts/<chapter>/, but ignore anything
+# in a raw/ subdir until it's been reviewed and stripped of secrets.
+transcripts/**/raw/
