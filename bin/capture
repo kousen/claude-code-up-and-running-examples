@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+#
+# capture — run a one-shot Claude Code prompt and save a clean transcript
+#           in the repo's house format.
+#
+# Usage:
+#   bin/capture <chapter> <slug> "<prompt text>"
+#   bin/capture <chapter> <slug> --prompt-file prompts/<chapter>/<name>.md
+#   bin/capture -f ...        # allow overwriting an existing transcript
+#
+# Examples:
+#   cd lyrics-trainer/ch03-local-persistence
+#   ../../bin/capture ch03 plan-alternatives-migration \
+#       --prompt-file ../../prompts/ch03/plan-alternatives-migration.md
+#
+# Scope:
+#   This wraps `claude -p`, which is NON-interactive: one prompt in, one
+#   answer out. It is ideal for self-contained questions. Multi-turn captures
+#   (a clarification pass, approving an edit, then a follow-up) are still done
+#   in an interactive `claude` session with `/copy`, then pasted into the
+#   transcript by hand.
+#
+# Behavior:
+#   - Saves to transcripts/<chapter>/<slug>.md relative to the repo root.
+#   - Records date, working directory, the prompt, and the output.
+#   - Rewrites your home directory to ~ in the saved file (light redaction).
+#   - Refuses to clobber an existing transcript unless you pass -f.
+
+set -euo pipefail
+
+force=0
+if [[ "${1:-}" == "-f" ]]; then
+  force=1
+  shift
+fi
+
+chapter="${1:-}"
+slug="${2:-}"
+shift 2 2>/dev/null || true
+
+if [[ -z "$chapter" || -z "$slug" || $# -eq 0 ]]; then
+  echo "usage: capture [-f] <chapter> <slug> \"<prompt>\" | --prompt-file <path>" >&2
+  exit 2
+fi
+
+# Repo root = parent of the directory holding this script.
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Resolve the prompt: literal text, or extracted from a prompt file's first
+# fenced code block.
+if [[ "$1" == "--prompt-file" ]]; then
+  prompt_file="${2:-}"
+  [[ -f "$prompt_file" ]] || { echo "no such prompt file: $prompt_file" >&2; exit 1; }
+  prompt="$(awk '/^```/{inblock=!inblock; next} inblock' "$prompt_file")"
+else
+  prompt="$*"
+fi
+
+[[ -n "$prompt" ]] || { echo "empty prompt" >&2; exit 1; }
+
+out_dir="$repo_root/transcripts/$chapter"
+out_file="$out_dir/$slug.md"
+mkdir -p "$out_dir"
+
+if [[ -e "$out_file" && $force -eq 0 ]]; then
+  echo "refusing to overwrite $out_file (pass -f to replace)" >&2
+  exit 1
+fi
+
+pretty_cwd="${PWD/#$HOME/~}"
+title="$(echo "$slug" | tr '-' ' ')"
+today="$(date +%Y-%m-%d)"
+
+echo "running claude -p ..." >&2
+output="$(claude -p "$prompt")"
+
+{
+  echo "# ${chapter} ${title}"
+  echo
+  echo "Date captured: ${today}"
+  echo
+  echo "Working directory:"
+  echo
+  echo '```text'
+  echo "${pretty_cwd}"
+  echo '```'
+  echo
+  echo "Prompt:"
+  echo
+  echo '```text'
+  echo "${prompt}"
+  echo '```'
+  echo
+  echo "Output:"
+  echo
+  echo '```text'
+  echo "${output//$HOME/~}"
+  echo '```'
+} > "$out_file"
+
+echo "saved → ${out_file/#$HOME/~}"
