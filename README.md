@@ -33,7 +33,7 @@ lyrics-trainer/        # Browser-based vocab trainer (the "doghouse")
   ch02-first-doghouse/   Initial vibe-coded version
   ch03-local-storage/    Persistence added
   ch04-tested-modules/   Refactored toward tests
-  ch05-navigation/       Branch-first navigation change
+  ch05-navigation/       Branch-first navigation change + Playwright matrix
 
 weather-app/           # Small Flask weather service (the "cabin")
   ch05-permissions/      Permissions, safety, secrets

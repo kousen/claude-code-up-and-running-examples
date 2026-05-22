@@ -78,6 +78,8 @@ yarn-error.log*
 # ---- JS/TS test + bundler artifacts (Vitest/Jest, Vite, Next, Parcel) -------
 coverage/
 *.lcov
+playwright-report/
+test-results/
 .vite/
 .next/
 .nuxt/
