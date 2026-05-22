@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Weather Error</title>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel" aria-labelledby="error-title">
+        <h1 id="error-title">Weather unavailable</h1>
+        <p class="error" role="alert">{{ error_message }}</p>
+        <a class="back-link" href="{{ url_for('home') }}">Try another city</a>
+      </section>
+    </main>
+  </body>
+</html>

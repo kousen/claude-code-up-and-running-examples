@@ -1,0 +1,14 @@
+{
+  "name": "lyrics-trainer-ch05-navigation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Chapter 5 — Lyrics Trainer with navigation controls",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.7"
+  }
+}
