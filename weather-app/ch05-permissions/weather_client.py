@@ -6,8 +6,7 @@ import requests
 
 
 GEOCODING_API_ENDPOINT = "https://api.openweathermap.org/geo/1.0/direct"
-OWM_ENDPOINT = "https://api.openweathermap.org/data/2.5/weather"
-OWM_FORECAST_ENDPOINT = "https://api.openweathermap.org/data/2.5/forecast"
+ONE_CALL_API_ENDPOINT = "https://api.openweathermap.org/data/3.0/onecall"
 
 
 class WeatherLookupError(Exception):
@@ -65,24 +64,16 @@ class OpenWeatherClient:
 
         lat, lon = self._lookup_coordinates(city_name)
         weather_data = self._get_json(
-            OWM_ENDPOINT,
+            ONE_CALL_API_ENDPOINT,
             {
                 "lat": lat,
                 "lon": lon,
                 "appid": self.api_key,
                 "units": "metric",
+                "exclude": "minutely,hourly,alerts",
             },
         )
-        forecast_data = self._get_json(
-            OWM_FORECAST_ENDPOINT,
-            {
-                "lat": lat,
-                "lon": lon,
-                "appid": self.api_key,
-                "units": "metric",
-            },
-        )
-        return self._build_report(city_name, weather_data, forecast_data)
+        return self._build_report(city_name, weather_data)
 
     def _lookup_coordinates(self, city_name):
         location_data = self._get_json(
@@ -106,32 +97,29 @@ class OpenWeatherClient:
         except requests.RequestException as exc:
             raise WeatherLookupError(f"OpenWeather request failed: {url}") from exc
 
-    def _build_report(self, city_name, weather_data, forecast_data):
+    def _build_report(self, city_name, weather_data):
         try:
             today = self.clock()
-            current_weather = weather_data["weather"][0]["main"]
-            forecast_items = [
-                item
-                for item in forecast_data["list"]
-                if "12:00:00" in item.get("dt_txt", "")
-            ]
+            current = weather_data["current"]
+            daily = weather_data["daily"]
+            current_weather = current["weather"][0]["main"]
             forecast = [
                 ForecastDay(
-                    day=(today + dt.timedelta(days=index)).strftime("%a"),
+                    day=dt.datetime.fromtimestamp(item["dt"]).strftime("%a"),
                     weather=item["weather"][0]["main"],
-                    temp_c=round(item["main"]["temp"]),
+                    temp_c=round(item["temp"]["day"]),
                 )
-                for index, item in enumerate(forecast_items[:5])
+                for item in daily[:5]
             ]
 
             return WeatherReport(
                 city_name=city_name,
                 current_date=today.strftime("%A, %B %d"),
-                current_temp_c=round(weather_data["main"]["temp"]),
+                current_temp_c=round(current["temp"]),
                 current_weather=current_weather,
-                min_temp_c=round(weather_data["main"]["temp_min"]),
-                max_temp_c=round(weather_data["main"]["temp_max"]),
-                wind_speed=weather_data["wind"]["speed"],
+                min_temp_c=round(daily[0]["temp"]["min"]),
+                max_temp_c=round(daily[0]["temp"]["max"]),
+                wind_speed=current["wind_speed"],
                 forecast=forecast,
             )
         except (KeyError, IndexError, TypeError) as exc:

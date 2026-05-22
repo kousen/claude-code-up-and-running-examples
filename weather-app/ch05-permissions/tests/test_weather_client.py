@@ -5,8 +5,7 @@ import requests
 
 from weather_client import (
     GEOCODING_API_ENDPOINT,
-    OWM_ENDPOINT,
-    OWM_FORECAST_ENDPOINT,
+    ONE_CALL_API_ENDPOINT,
     OpenWeatherClient,
     WeatherConfigError,
     WeatherLookupError,
@@ -36,32 +35,28 @@ class FakeSession:
         return self.responses.pop(0)
 
 
-def forecast_payload():
+def one_call_payload():
     return {
-        "list": [
-            {"dt_txt": "2026-05-22 12:00:00", "main": {"temp": 21.2}, "weather": [{"main": "Clouds"}]},
-            {"dt_txt": "2026-05-23 12:00:00", "main": {"temp": 19.4}, "weather": [{"main": "Rain"}]},
-            {"dt_txt": "2026-05-24 12:00:00", "main": {"temp": 22.0}, "weather": [{"main": "Clear"}]},
-            {"dt_txt": "2026-05-25 12:00:00", "main": {"temp": 24.1}, "weather": [{"main": "Clear"}]},
-            {"dt_txt": "2026-05-26 12:00:00", "main": {"temp": 20.8}, "weather": [{"main": "Mist"}]},
-        ]
+        "current": {
+            "temp": 21.2,
+            "weather": [{"main": "Clouds"}],
+            "wind_speed": 4.2,
+        },
+        "daily": [
+            {"dt": 1779451200, "temp": {"day": 21.2, "min": 18.3, "max": 24.1}, "weather": [{"main": "Clouds"}]},
+            {"dt": 1779537600, "temp": {"day": 19.4, "min": 16.0, "max": 21.0}, "weather": [{"main": "Rain"}]},
+            {"dt": 1779624000, "temp": {"day": 22.0, "min": 18.0, "max": 25.0}, "weather": [{"main": "Clear"}]},
+            {"dt": 1779710400, "temp": {"day": 24.1, "min": 20.0, "max": 26.0}, "weather": [{"main": "Clear"}]},
+            {"dt": 1779796800, "temp": {"day": 20.8, "min": 17.0, "max": 23.0}, "weather": [{"main": "Mist"}]},
+        ],
     }
 
 
-def weather_payload():
-    return {
-        "main": {"temp": 21.2, "temp_min": 18.3, "temp_max": 24.1},
-        "weather": [{"main": "Clouds"}],
-        "wind": {"speed": 4.2},
-    }
-
-
-def test_get_weather_uses_geocoding_then_weather_and_forecast_endpoints():
+def test_get_weather_uses_geocoding_then_one_call_endpoint():
     session = FakeSession(
         [
             FakeResponse([{"lat": 40.7, "lon": -74.0}]),
-            FakeResponse(weather_payload()),
-            FakeResponse(forecast_payload()),
+            FakeResponse(one_call_payload()),
         ]
     )
     client = OpenWeatherClient(
@@ -77,11 +72,11 @@ def test_get_weather_uses_geocoding_then_weather_and_forecast_endpoints():
     assert report.forecast[1].day == "Sat"
     assert [call["url"] for call in session.calls] == [
         GEOCODING_API_ENDPOINT,
-        OWM_ENDPOINT,
-        OWM_FORECAST_ENDPOINT,
+        ONE_CALL_API_ENDPOINT,
     ]
     assert session.calls[0]["params"]["q"] == "New York"
     assert all(call["params"]["appid"] == "fake-key" for call in session.calls)
+    assert session.calls[1]["params"]["exclude"] == "minutely,hourly,alerts"
 
 
 def test_missing_api_key_fails_before_network_call():
