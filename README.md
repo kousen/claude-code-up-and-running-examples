@@ -4,17 +4,19 @@ Companion code for the book *Claude Code: Up and Running* by Kenneth Kousen.
 
 ## How to use this repo
 
-Clone once, then work in whichever project folder a chapter is using.
-Each project (`lyrics-trainer/`, `weather-app/`, `mockhub/`) is **fully
-self-contained** — its own dependencies, its own run/test commands, its
-own README. There is no shared root build file. You should never need to
-clone a second repository to follow along with the book.
+Clone once, then work in whichever project folder a chapter is using. The
+`lyrics-trainer/` and `weather-app/` projects are fully self-contained: their
+own dependencies, their own run/test commands, their own README files. MockHub
+is the exception. The MockHub application code lives in its own GitHub
+repository; this repo holds the book's surrounding skills, agents, prompts,
+transcripts, and workflow artifacts.
 
 ## Related external repositories
 
-A few of the book's examples have fuller upstream implementations or
-companion projects that live in their own repositories. You don't need
-them to work through the book, but they're useful for reference:
+A few of the book's examples have fuller upstream implementations or companion
+projects that live in their own repositories. You do need the MockHub repository
+for the Ch. 6-9 skyscraper-scale application work; the other external repos are
+useful references:
 
 | Repo | Role |
 | --- | --- |

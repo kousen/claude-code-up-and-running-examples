@@ -9,6 +9,10 @@ with React components on the front end, built with Gradle. This folder
 holds **the artifacts the book builds *around* it**: skills, sub-agent
 definitions, MCP configurations, headless scripts, and captured workflows.
 
+The book will eventually point to a specific MockHub tag or commit when the
+text is frozen. Until then, use the live repository for context and treat the
+files here as copyable agent-facing examples.
+
 To work through Ch. 6–9, clone MockHub separately and point Claude Code
 at it; the artifacts here are designed to be dropped into or referenced
 from that working tree.
