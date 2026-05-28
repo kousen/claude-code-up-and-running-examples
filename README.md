@@ -15,8 +15,9 @@ transcripts, and workflow artifacts.
 
 A few of the book's examples have fuller upstream implementations or companion
 projects that live in their own repositories. You do need the MockHub repository
-for the Ch. 6-9 skyscraper-scale application work; the other external repos are
-useful references:
+for the skyscraper-scale application work in the later chapters (roughly Ch. 6-11,
+except for the Ch. 8 codebase-exploration example, which uses a public framework
+repository instead); the other external repos are useful references:
 
 | Repo | Role |
 | --- | --- |
@@ -31,24 +32,28 @@ project evolves across multiple chapters, so each project folder contains
 chapter-specific subfolders that represent its state at that point in the book.
 
 ```
-lyrics-trainer/        # Browser-based vocab trainer (the "doghouse")
-  ch02-first-doghouse/   Initial vibe-coded version
-  ch03-local-storage/    Persistence added
-  ch04-tested-modules/   Refactored toward tests
-  ch05-navigation/       Branch-first navigation change + Playwright matrix
+lyrics-trainer/          # Browser-based memorization trainer (the "doghouse")
+  ch02-first-doghouse/     Initial vibe-coded single file
+  ch03-local-persistence/  localStorage persistence added
+  ch04-testable-core/      Refactored into tested modules
+  ch05-navigation/         Branch-first navigation change + Playwright matrix
 
-weather-app/           # Small Flask weather service (the "cabin")
-  ch05-permissions/      Permissions, safety, secrets
-  ch09-review-testing/   Test-first refactoring (if used here)
+weather-app/             # Small Flask weather service (the "cabin")
+  ch05-permissions/        Permissions, safety, secrets
 
-mockhub/               # Larger app used for skills, MCP, and PR workflows
-  ch06-skills/           PR-readiness skill, sub-agents
-  ch07-mcp/              MockHub as an MCP server
-  ch08-prompt-to-pr/     Issue → plan → PR workflow
-  ch09-review-testing/   Review, debugging, failure recovery
+mockhub/                 # Larger app: skills, sub-agents, MCP, and PR workflows
+  ch06-skills/             PR-readiness skill plus the reviewer sub-agents
 
-prompts/               # Reusable prompts referenced in the text, by chapter
-transcripts/           # Captured Claude Code session transcripts, by chapter
+prompts/                 # Reusable prompts referenced in the text, by chapter
+transcripts/             # Captured Claude Code session transcripts, by chapter
 ```
+
+The `prompts/` and `transcripts/` folders are numbered to match the book's
+chapters, so they skip any chapter that has no captured artifact (Chapter 6's
+skills work lives under `mockhub/`, and Chapter 8 uses a public framework
+repository rather than a captured session). The current chapter map for the
+later, MockHub-centered chapters is: Chapter 7 (sub-agents and agent teams),
+Chapter 9 (MCP), Chapter 10 (prompt to pull request), and Chapter 11 (review,
+testing, debugging, and recovery).
 
 This layout may evolve as chapters are finalized.

@@ -2,11 +2,11 @@
 
 Prompt:
 
-`prompts/ch09/mockhub-167-builder-migration-execute.md`
+`prompts/ch11/mockhub-167-builder-migration-execute.md`
 
 Raw stream capture:
 
-`transcripts/ch09/mockhub-167-builder-migration-execute-stream.jsonl`
+`transcripts/ch11/mockhub-167-builder-migration-execute-stream.jsonl`
 
 ## Run Note
 
@@ -97,7 +97,7 @@ PR-material capture:
 
 ## Manuscript Diff Excerpt
 
-One representative before/after excerpt for Chapter 9:
+One representative before/after excerpt for Chapter 11:
 
 ```diff
 @@

@@ -29,7 +29,7 @@ If they are available, report:
 - why this read-only connector capture complements the separate protocol-level
   checkout capture
 
-Keep the output concise and suitable for quoting in Chapter 7.
+Keep the output concise and suitable for quoting in Chapter 9.
 ```
 
 Output:
@@ -83,5 +83,5 @@ Each listing includes `commercePolicyUrl` — the hook later steps would feed to
 
 ### Why This Complements the Protocol-Level Capture
 
-The protocol-level checkout capture (separate artifact) exercises the *full* AP2 mandate → payment credential → checkout flow at the wire level, showing how an agent negotiates a purchase end-to-end. This connector capture instead documents what's reachable from inside Claude Code *as a tool surface* — proving (a) the MCP connector is correctly authenticated and discoverable, (b) the read-only discovery half of MockHub is usable without any mandates or credentials, and (c) the boundary between read-only inspection and state-mutating commerce is cleanly delineated in the tool taxonomy. Together they give Chapter 7 both perspectives: the inert tool catalog a developer sees in Claude Code, and the live protocol exchange that happens when those tools fire.
+The protocol-level checkout capture (separate artifact) exercises the *full* AP2 mandate → payment credential → checkout flow at the wire level, showing how an agent negotiates a purchase end-to-end. This connector capture instead documents what's reachable from inside Claude Code *as a tool surface* — proving (a) the MCP connector is correctly authenticated and discoverable, (b) the read-only discovery half of MockHub is usable without any mandates or credentials, and (c) the boundary between read-only inspection and state-mutating commerce is cleanly delineated in the tool taxonomy. Together they give Chapter 9 both perspectives: the inert tool catalog a developer sees in Claude Code, and the live protocol exchange that happens when those tools fire.
 ```

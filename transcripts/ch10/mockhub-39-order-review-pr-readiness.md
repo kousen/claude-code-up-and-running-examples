@@ -3,16 +3,16 @@
 Command:
 
 ```bash
-claude -p "$(cat /Users/kennethkousen/Documents/books/claude-code-up-and-running-examples/prompts/ch08/mockhub-39-order-review-pr-readiness.md)" \
+claude -p "$(cat /Users/kennethkousen/Documents/books/claude-code-up-and-running-examples/prompts/ch10/mockhub-39-order-review-pr-readiness.md)" \
   --permission-mode dontAsk \
   --output-format stream-json --include-partial-messages --verbose \
-  | tee /Users/kennethkousen/Documents/books/claude-code-up-and-running-examples/transcripts/ch08/mockhub-39-order-review-pr-readiness-stream.jsonl
+  | tee /Users/kennethkousen/Documents/books/claude-code-up-and-running-examples/transcripts/ch10/mockhub-39-order-review-pr-readiness-stream.jsonl
 ```
 
 Raw stream:
 
 ```text
-transcripts/ch08/mockhub-39-order-review-pr-readiness-stream.jsonl
+transcripts/ch10/mockhub-39-order-review-pr-readiness-stream.jsonl
 ```
 
 ## Final Report From Claude Code

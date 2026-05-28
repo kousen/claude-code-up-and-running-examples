@@ -4,11 +4,11 @@ Date: 2026-05-26
 
 MockHub branch: `feat/ch08-order-review-step`
 
-Raw stream transcript: `transcripts/ch08/mockhub-39-order-review-implementation-stream.jsonl`
+Raw stream transcript: `transcripts/ch10/mockhub-39-order-review-implementation-stream.jsonl`
 
 ## Prompt
 
-See `prompts/ch08/mockhub-39-order-review-implementation.md`.
+See `prompts/ch10/mockhub-39-order-review-implementation.md`.
 
 ## Claude Code Result
 

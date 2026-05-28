@@ -19,5 +19,5 @@ If they are available, report:
 - why this read-only connector capture complements the separate protocol-level
   checkout capture
 
-Keep the output concise and suitable for quoting in Chapter 7.
+Keep the output concise and suitable for quoting in Chapter 9.
 ```
