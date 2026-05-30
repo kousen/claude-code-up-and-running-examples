@@ -19,7 +19,8 @@ $RECYCLE.BIN/
 .idea/
 *.iml
 .vscode/*
-!.vscode/settings.json
+# settings.json holds machine-specific paths (e.g. per-folder venv interpreter),
+# so it stays local. extensions/launch are shareable and remain tracked.
 !.vscode/extensions.json
 !.vscode/launch.json
 *.swp
