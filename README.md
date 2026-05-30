@@ -44,6 +44,7 @@ weather-app/             # Small Flask weather service (the "cabin")
 mockhub/                 # Larger app: skills, sub-agents, MCP, and PR workflows
   ch06-skills/             PR-readiness skill plus the reviewer sub-agents
 
+examples/                # Standalone, runnable demos that aren't part of a project, by chapter
 prompts/                 # Reusable prompts referenced in the text, by chapter
 transcripts/             # Captured Claude Code session transcripts, by chapter
 ```
