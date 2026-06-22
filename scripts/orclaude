@@ -14,6 +14,10 @@ alias_name="$1"
 shift
 
 case "$alias_name" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
   glm)
     # TODO(author): Re-confirm this OpenRouter slug before publishing.
     primary_model="${ORCLAUDE_GLM_MODEL:-z-ai/glm-5.2}"
