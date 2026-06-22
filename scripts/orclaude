@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+  printf 'Usage: %s <glm|kimi> [claude args...]\n' "${0##*/}" >&2
+}
+
+if [[ $# -lt 1 ]]; then
+  usage
+  exit 2
+fi
+
+alias_name="$1"
+shift
+
+case "$alias_name" in
+  glm)
+    # TODO(author): Re-confirm this OpenRouter slug before publishing.
+    primary_model="${ORCLAUDE_GLM_MODEL:-z-ai/glm-5.2}"
+    opus_model="${ORCLAUDE_GLM_OPUS_MODEL:-$primary_model}"
+    sonnet_model="${ORCLAUDE_GLM_SONNET_MODEL:-$primary_model}"
+    haiku_model="${ORCLAUDE_GLM_HAIKU_MODEL:-$primary_model}"
+    subagent_model="${ORCLAUDE_GLM_SUBAGENT_MODEL:-$sonnet_model}"
+    ;;
+  kimi)
+    # TODO(author): Re-confirm this OpenRouter slug before publishing.
+    primary_model="${ORCLAUDE_KIMI_MODEL:-moonshotai/kimi-k2.7-code}"
+    opus_model="${ORCLAUDE_KIMI_OPUS_MODEL:-$primary_model}"
+    sonnet_model="${ORCLAUDE_KIMI_SONNET_MODEL:-$primary_model}"
+    haiku_model="${ORCLAUDE_KIMI_HAIKU_MODEL:-$primary_model}"
+    subagent_model="${ORCLAUDE_KIMI_SUBAGENT_MODEL:-$sonnet_model}"
+    ;;
+  *)
+    printf "Unknown model alias '%s'. Options: glm, kimi\n" "$alias_name" >&2
+    exit 2
+    ;;
+esac
+
+: "${OPENROUTER_API_KEY:?Set OPENROUTER_API_KEY in your shell profile, such as ~/.zshrc}"
+
+export ANTHROPIC_BASE_URL="${ORCLAUDE_BASE_URL:-https://openrouter.ai/api}"
+export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"
+export ANTHROPIC_API_KEY=""
+export ANTHROPIC_DEFAULT_OPUS_MODEL="$opus_model"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="$sonnet_model"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="$haiku_model"
+export CLAUDE_CODE_SUBAGENT_MODEL="$subagent_model"
+
+exec claude "$@"
