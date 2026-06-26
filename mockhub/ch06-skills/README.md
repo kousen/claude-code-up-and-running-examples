@@ -1,9 +1,9 @@
-# Chapters 6 and 7 MockHub Artifacts
+# Chapters 6 and 8 MockHub Artifacts
 
-Chapter 6 ("Skills and Hooks") uses the PR-readiness skill here; Chapter 7
+Chapter 6 ("Skills and Hooks") uses the PR-readiness skill here; Chapter 8
 ("Sub-agents, Agent Teams, and Plugins") uses the reviewer agents. The folder
 keeps the old `ch06-skills` name because the skill is the Chapter 6 artifact;
-the agents support the Chapter 7 material. The MockHub application code lives in
+the agents support the Chapter 8 material. The MockHub application code lives in
 its own repository:
 
 <https://github.com/kousen/mockhub>
