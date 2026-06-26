@@ -2,7 +2,7 @@
 set -euo pipefail
 
 usage() {
-  printf 'Usage: %s <glm|kimi> [claude args...]\n' "${0##*/}" >&2
+  printf 'Usage: %s <glm|kimi|vendor/model-slug> [claude args...]\n' "${0##*/}" >&2
 }
 
 if [[ $# -lt 1 ]]; then
@@ -34,8 +34,17 @@ case "$alias_name" in
     haiku_model="${ORCLAUDE_KIMI_HAIKU_MODEL:-$primary_model}"
     subagent_model="${ORCLAUDE_KIMI_SUBAGENT_MODEL:-$sonnet_model}"
     ;;
+  */*)
+    # Any vendor/model slug from OpenRouter (e.g. anthropic/claude-opus-4.1).
+    # Not pre-validated here — OpenRouter rejects an unknown slug at request time.
+    primary_model="$alias_name"
+    opus_model="$primary_model"
+    sonnet_model="$primary_model"
+    haiku_model="$primary_model"
+    subagent_model="$primary_model"
+    ;;
   *)
-    printf "Unknown model alias '%s'. Options: glm, kimi\n" "$alias_name" >&2
+    printf "Unknown model alias '%s'. Options: glm, kimi, or a vendor/model slug\n" "$alias_name" >&2
     exit 2
     ;;
 esac
