@@ -4,9 +4,9 @@
 #   source /path/to/claude-code-up-and-running-examples/scripts/orclaude-functions.zsh
 
 orglm() {
-  orclaude glm "$@"
+  orclaude z-ai/glm-5.2 "$@"
 }
 
 orkimi() {
-  orclaude kimi "$@"
+  orclaude moonshotai/kimi-k2.7-code "$@"
 }
