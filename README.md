@@ -45,15 +45,17 @@ mockhub/                 # Larger app: skills, sub-agents, MCP, and PR workflows
   ch06-skills/             PR-readiness skill plus the reviewer sub-agents
 
 examples/                # Standalone, runnable demos that aren't part of a project, by chapter
+  ch06/                    # Custom commands, migration skills, image-prompt, osquery
 prompts/                 # Reusable prompts referenced in the text, by chapter
 transcripts/             # Captured Claude Code session transcripts, by chapter
 ```
 
 The `prompts/` and `transcripts/` folders are numbered to match the book's
-chapters, so they skip any chapter that has no captured artifact (Chapter 6's
-skills work lives under `mockhub/`). The current chapter map for the later,
-MockHub-centered chapters is: Chapter 7 (MCP and external integrations),
-Chapter 8 (sub-agents and agent teams), Chapter 10 (prompt to pull request),
-and Chapter 11 (review, testing, debugging, and recovery).
+chapters, so they skip any chapter that has no captured artifact. Chapter 6's
+generic skills and custom-command examples live under `examples/ch06/`; MockHub
+skills and reviewer agents live under `mockhub/ch06-skills/`. The current chapter
+map for the later, MockHub-centered chapters is: Chapter 7 (MCP and external
+integrations), Chapter 8 (sub-agents and agent teams), Chapter 10 (prompt to
+pull request), and Chapter 11 (review, testing, debugging, and recovery).
 
 This layout may evolve as chapters are finalized.
