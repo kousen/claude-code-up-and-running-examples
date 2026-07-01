@@ -17,6 +17,7 @@ examples/ch06/
     security-review/
     image-prompt/
     osquery/
+    here-now/
 ```
 
 MockHub-specific skills and reviewer agents live separately under

@@ -15,6 +15,7 @@ stack.
 | `security-review/` | `allowed-tools` (read-only), `disable-model-invocation` |
 | `image-prompt/` | Structured-interview dialog for image-generation prompts |
 | `osquery/` | Natural-language wrapper around a local CLI (`osqueryi --json`) with a `queries.md` reference file |
+| `here-now/` | Remote REST publish workflow (`publish.sh`); syntax in the API docs, semantics in the skill. Upstream: `heredotnow/skill` on GitHub; book snapshot may lag the live skill. |
 
 ## Install
 
