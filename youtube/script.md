@@ -87,8 +87,7 @@ To keep this fair, every model gets the **exact same job**. No cherry-picking.
 
 [SCREEN: show the prompt I'll paste each time.]
 
-> *"In this project, implement `parseDuration` so it turns a string like `1h30m` or `45s` into a total
-> number of seconds, then write a couple of tests and run them."*
+> *To demonstrate what this model can do, implement a `parseDuration` function so it turns a string like "1h30m" or "45s" into a total number of seconds, then show me a test or two. Just displaying it the console is fine. We don't need to save them anywhere just yet.*
 
 Small, self-contained, and it forces the model to actually drive the tools — read the file, write code,
 run the tests, react to the output. That's the part that separates "can chat about code" from "can
