@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 # Run Claude Code against any OpenRouter model: orclaude <vendor/model-slug> [claude args...]
 : "${OPENROUTER_API_KEY:?Set OPENROUTER_API_KEY in your shell profile, such as ~/.zshrc}"
+MODEL="$1"
+shift
 export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
 export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"
 export ANTHROPIC_API_KEY=""
-export ANTHROPIC_DEFAULT_OPUS_MODEL="$1"
-export ANTHROPIC_DEFAULT_SONNET_MODEL="$1"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="$1"
-export CLAUDE_CODE_SUBAGENT_MODEL="$1"
-shift
-exec claude "$@"
+export ANTHROPIC_DEFAULT_OPUS_MODEL="$MODEL"
+export ANTHROPIC_DEFAULT_SONNET_MODEL="$MODEL"
+export ANTHROPIC_DEFAULT_HAIKU_MODEL="$MODEL"
+export CLAUDE_CODE_SUBAGENT_MODEL="$MODEL"
+exec claude --model "$MODEL" "$@"

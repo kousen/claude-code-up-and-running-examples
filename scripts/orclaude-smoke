@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Verify that orclaude actually routes to the model you name:
+#   orclaude-smoke <vendor/model-slug>
+# Runs one headless prompt and checks which model the request was billed
+# against. Do not ask the model what it is -- it answers from under Claude
+# Code's system prompt and will claim to be Claude.
+set -euo pipefail
+slug="${1:?Usage: orclaude-smoke <vendor/model-slug>}"
+dir="$(cd "$(dirname "$0")" && pwd)"
+result="$("$dir/orclaude" "$slug" -p "Say hello" --output-format json 2>/dev/null)"
+billed="$(printf '%s' "$result" | python3 -c 'import json,sys; print(" ".join(json.load(sys.stdin)["modelUsage"]))')"
+if [ "$billed" = "$slug" ]; then
+    echo "PASS: request billed against $billed"
+else
+    echo "FAIL: expected $slug, modelUsage reported: $billed" >&2
+    exit 1
+fi
