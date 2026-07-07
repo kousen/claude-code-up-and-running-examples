@@ -22,7 +22,7 @@ router, Claude Code won't tell you which model it actually picked (but the OpenR
 will). For a project that should always use one routed backend, .claude/settings.local.json can
 persist the same env vars; the script is for fast model switching.
 
-This ties into my book, Claude Code: Up and Running — the OpenRouter material lands in Chapter 12,
+This ties into my book, Claude Code: Up and Running — the OpenRouter material lands in Chapter 11,
 coming to the early release later. The orclaude script is in the book's example repo (link below).
 
 ⏱️ Chapters

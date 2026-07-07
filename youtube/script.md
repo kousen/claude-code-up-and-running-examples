@@ -215,7 +215,7 @@ your patience. But now you can run this experiment yourself in about ten seconds
 ## BOOK TIE-IN + CTA  (11:00–end)
 
 This whole topic — running Claude Code on other models through OpenRouter — is something I'm covering in
-my new book, **Claude Code: Up and Running**. It'll land in Chapter 12; that chapter's coming to the
+my new book, **Claude Code: Up and Running**. It'll land in Chapter 11; that chapter's coming to the
 early release a bit later, so consider this an early preview.
 
 The `orclaude` script is in the book's example repo — link in the description. Grab it, point it at

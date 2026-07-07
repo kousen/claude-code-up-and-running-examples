@@ -118,7 +118,7 @@ Turn the limitation into a payoff on camera:
    some models drive Claude Code's tool calls cleanly, others fumble multi-step tool use or subagents.
    This honesty *is* the value — "here's the catch" is better content than pretending it's flawless.
 
-7. **Book tie-in + CTA (11:00–end)** — this connects to *Claude Code: Up and Running* (Chapter 12,
+7. **Book tie-in + CTA (11:00–end)** — this connects to *Claude Code: Up and Running* (Chapter 11,
    coming to the early release later). Soft: "the script's in the book's example repo, link below."
 
 ---
