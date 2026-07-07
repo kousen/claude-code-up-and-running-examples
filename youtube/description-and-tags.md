@@ -15,8 +15,8 @@ OpenRouter — DeepSeek, GLM, Kimi, even the openrouter/auto and openrouter/free
 routers — all from one tiny bash wrapper.
 
 The trick: Claude Code reads ANTHROPIC_BASE_URL, so you point it at OpenRouter's
-Anthropic-compatible endpoint, hand it your OpenRouter key, and remap the model env vars. The
-harness never knows the difference. I run the SAME coding task through each model so you can
+Anthropic-compatible endpoint, hand it your OpenRouter key, and pass the model slug straight
+through as --model. The harness never knows the difference. I run the SAME coding task through each model so you can
 judge them yourself — no leaderboard, no hype. I also show the one real catch: when you use a
 router, Claude Code won't tell you which model it actually picked (but the OpenRouter dashboard
 will). For a project that should always use one routed backend, .claude/settings.local.json can

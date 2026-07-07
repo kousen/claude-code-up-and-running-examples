@@ -57,22 +57,35 @@ it which model to use... and the harness has no idea anything changed.
 [SCREEN: highlight the export block.]
 
 That's it. Base URL goes to OpenRouter. The auth token is your OpenRouter key. And these three —
-opus, sonnet, haiku — those are the model names Claude Code asks for internally. We just remap all of
-them to whatever model we actually want.
+opus, sonnet, haiku — those are shorthand names Claude Code uses internally for its model tiers. We
+point all of them at whatever model we actually want, so sub-agents and quick model switches land on
+the right backend too.
 
-[SCREEN: highlight the `$1` assignments.]
+[SCREEN: highlight the last line: `exec claude --model "$MODEL"`.]
 
-And here's the whole point: the first argument is the model. Any raw OpenRouter slug — `vendor/model` —
-gets copied into all of those Claude Code model tiers. Nothing's hardcoded. If OpenRouter lists it, you
-can try Claude Code on it. That's the entire trick, and it's what we're leaning on for the rest of the
-video.
+But the line that really does it is the last one: the first argument becomes `--model`, passed
+straight to Claude Code on the command line. Any raw OpenRouter slug — `vendor/model` — and nothing's
+hardcoded. If OpenRouter lists it, you can try Claude Code on it.
+
+Why the flag and not just the environment variables? Because I got burned. If you've ever picked a
+model with the `/model` command, your settings file remembers it — and those tier variables get
+silently ignored, so you're staring at Claude Code politely running the model you *didn't* ask for.
+The `--model` flag outranks all of that. And it's the same thing `ollama launch claude` does under
+the hood, so we're in good company.
+
+[SCREEN: run `scripts/orclaude-smoke z-ai/glm-5.2`, let the PASS line land.]
+
+And because I got burned, the repo now has a smoke test. Don't bother asking the model what it is —
+when I tried that, DeepSeek cheerfully told me "Hello! I'm Claude Code." It answers from under Claude
+Code's system prompt; it'll say anything. This script runs one headless prompt and checks which model
+the request was actually *billed* against. PASS means the wiring works. Receipts, not vibes.
 
 [SCREEN: show a small `.claude/settings.local.json` snippet, or lower-third it.]
 
-There is another way to persist the same setup: `.claude/settings.local.json`. That's great when one
-project should always run through one routed backend. It is *not* what I'm using here, because this video
-is all about switching models quickly. Static JSON pins a repo; this wrapper lets the model be an
-argument.
+There is another way to persist the same setup: `.claude/settings.local.json` — the repo ships a
+template as `scripts/settings.local.json.example`. That's great when one project should always run
+through one routed backend. It is *not* what I'm using here, because this video is all about switching
+models quickly. Static JSON pins a repo; this wrapper lets the model be an argument.
 
 [B-ROLL: openrouter.ai/models page, scrolling.]
 

@@ -10,16 +10,23 @@
 
 Claude Code reads `ANTHROPIC_BASE_URL` + `ANTHROPIC_AUTH_TOKEN`. OpenRouter exposes an
 Anthropic-compatible endpoint. So you point Claude Code at OpenRouter, hand it an OpenRouter
-API key, and set the model env vars — the harness never knows the difference. `scripts/orclaude`
-is a tiny bash wrapper that uses its first argument as the model slug, sets those variables, and
-`exec`s `claude "$@"`.
+API key, and name the model — the harness never knows the difference. `scripts/orclaude`
+is a tiny bash wrapper that sets those variables, points the tier env vars at its first argument,
+and `exec`s `claude --model <slug> "$@"`.
 
-Show `scripts/orclaude` on screen. The whole trick is the export block: every Claude Code model
-tier gets the same raw `vendor/model` argument.
+Show `scripts/orclaude` on screen. The load-bearing line is the last one: the slug goes straight
+through as `--model`, which outranks any model pinned in `settings.json` (the tier env vars alone
+get silently ignored when settings pin a concrete model ID — that's a real bug we hit). Same
+mechanism `ollama launch claude` uses. The tier vars stay as backup for sub-agents.
+
+Proof beat: `scripts/orclaude-smoke <slug>` runs one headless prompt and checks the `modelUsage`
+key — which model the request was *billed* against. Don't ask the model its name; it answers from
+under Claude Code's system prompt and claims to be Claude Code.
 
 Mention the project-local alternative briefly: `.claude/settings.local.json` can persist the same
-`env` values when one repository should always use one routed backend. It is not the demo path,
-because this video needs to swap models every run.
+`env` values when one repository should always use one routed backend (template ships as
+`scripts/settings.local.json.example`). It is not the demo path, because this video needs to swap
+models every run.
 
 ---
 
@@ -92,10 +99,11 @@ Turn the limitation into a payoff on camera:
    locked to one vendor, learning what the harness vs. the model each contribute. *No* "X beats Claude"
    claims — this video is about optionality, not a leaderboard.
 
-3. **The mechanism (1:30–3:30)** — show `scripts/orclaude`. Walk the env vars. Show that raw
-   `vendor/model` slugs work because the first argument becomes every Claude Code model tier. Mention
-   `.claude/settings.local.json` as the static per-project version, then explain why the video uses the
-   script for fast model switching. This is the teachable core.
+3. **The mechanism (1:30–3:30)** — show `scripts/orclaude`. Walk the env vars, then land on the
+   `--model` flag as the line that guarantees the slug wins (tier env vars alone lose to a pinned
+   settings model). Run `orclaude-smoke` as the proof beat — includes the "DeepSeek said it was
+   Claude Code" story. Mention `.claude/settings.local.json` as the static per-project version, then
+   explain why the video uses the script for fast model switching. This is the teachable core.
 
 4. **The task (3:30–4:00)** — define ONE small, judgeable task and show it once. Keep it identical for
    every model so the comparison is fair. (Suggested task in `script.md`.)
@@ -125,6 +133,8 @@ Turn the limitation into a payoff on camera:
 
 - [ ] `OPENROUTER_API_KEY` exported in the recording shell (don't show the key on camera).
 - [ ] `scripts/orclaude` on PATH or aliased.
+- [ ] `scripts/orclaude-smoke <slug>` run once against the recording shell — a settings.json model
+      pin or stray `ANTHROPIC_API_KEY` in the profile will silently sabotage the demo otherwise.
 - [ ] Every slug above verified live on openrouter.ai/models.
 - [ ] One clean sample project + the chosen task staged and reset between runs.
 - [ ] OpenRouter Activity dashboard open in a tab (to reveal what the routers picked).
