@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Weather App</title>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel" aria-labelledby="weather-title">
+        <h1 id="weather-title">Weather</h1>
+        <form class="search" action="{{ url_for('home') }}" method="post" autocomplete="off">
+          <label for="search">City</label>
+          <div class="search-row">
+            <input type="text" name="search" id="search" placeholder="Search for a city" autofocus>
+            <button type="submit">Search</button>
+          </div>
+        </form>
+        {% if error_message %}
+        <p class="error" role="alert">{{ error_message }}</p>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

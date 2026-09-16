@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>{{ city_name }} Weather</title>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel forecast" aria-labelledby="city-title">
+        <a class="back-link" href="{{ url_for('home') }}">Change city</a>
+        <h1 id="city-title">{{ city_name }}</h1>
+        <p class="date">{{ current_date }}</p>
+
+        <div class="current">
+          <p class="temp">{{ current_temp }} deg C</p>
+          <p>{{ current_weather }}</p>
+          <p>{{ min_temp }} to {{ max_temp }} deg C</p>
+          <p>{{ wind_speed }} meter/sec wind</p>
+        </div>
+
+        {% if forecast %}
+        <h2>Five-day forecast</h2>
+        <ul class="forecast-list">
+          {% for item in forecast %}
+          <li>
+            <span>{{ item.day }}</span>
+            <span>{{ item.weather }}</span>
+            <span>{{ item.temp_c }} deg C</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
