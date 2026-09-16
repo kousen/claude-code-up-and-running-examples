@@ -135,3 +135,6 @@ temp/
 # Track redacted transcripts under transcripts/<chapter>/, but ignore anything
 # in a raw/ subdir until it's been reviewed and stripped of secrets.
 transcripts/**/raw/
+
+# Lighthouse output from the ch11 /goal runs (scores live in transcripts/ch11/)
+lighthouse.json
