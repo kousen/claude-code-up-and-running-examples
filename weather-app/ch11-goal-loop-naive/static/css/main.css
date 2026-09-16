@@ -1,0 +1,269 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(160deg, #dff1f7 0%, #e7f0f2 45%, #f6efe3 100%) fixed;
+  color: #172026;
+  --ink-muted: #486168;
+  --accent: #175d74;
+  --accent-soft: #eef6f7;
+  --line: #d4e0e3;
+  --focus: #f4b942;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.panel {
+  width: min(100%, 42rem);
+  background: #ffffff;
+  border: 1px solid #c9d7da;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 24px 60px rgb(23 32 38 / 14%);
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.25rem;
+}
+
+h2 {
+  margin-top: 2.5rem;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.lede {
+  color: var(--ink-muted);
+  margin-bottom: 1.75rem;
+}
+
+label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.search-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+input,
+button {
+  font: inherit;
+  border-radius: 8px;
+}
+
+input {
+  min-width: 0;
+  flex: 1;
+  border: 1px solid #95a8ad;
+  padding: 0.85rem 1rem;
+  font-size: 1.1rem;
+}
+
+button {
+  border: 0;
+  background: var(--accent);
+  color: #ffffff;
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+button:hover {
+  background: #124b5e;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.error {
+  margin-top: 1rem;
+  color: #9b1c31;
+  font-weight: 700;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.date {
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-icon {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.current {
+  padding: 1.5rem;
+  background: var(--accent-soft);
+  border-radius: 12px;
+}
+
+.temp {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+
+.unit {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin-left: 0.25rem;
+}
+
+.condition {
+  font-size: 1.25rem;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.stats dt {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.stats dd {
+  margin: 0.25rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.forecast-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+}
+
+.forecast-list li {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: 1rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.forecast-list .day {
+  font-weight: 700;
+}
+
+.forecast-list .icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.forecast-list .cond {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.forecast-list .deg {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 38rem) {
+  .shell {
+    padding: 1rem;
+  }
+
+  .panel {
+    padding: 1.5rem;
+  }
+
+  .search-row {
+    flex-direction: column;
+  }
+
+  .hero-icon {
+    font-size: 3rem;
+  }
+
+  .temp {
+    font-size: 3rem;
+  }
+
+  .forecast-list {
+    grid-template-columns: 1fr;
+  }
+
+  .forecast-list li {
+    grid-template-columns: 4rem 2.5rem 1fr auto;
+    justify-items: start;
+    align-items: center;
+    text-align: left;
+    padding: 0.75rem 1rem;
+  }
+}

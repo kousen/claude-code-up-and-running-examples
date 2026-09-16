@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>{{ city_name }} Weather</title>
+  </head>
+  <body>
+    {# ponytail: emoji keyed on OpenWeather "main"; swap for the icon set from the API if you want the exact glyphs #}
+    {% set icons = {
+      "Clear": "☀️", "Clouds": "☁️", "Rain": "🌧️", "Drizzle": "🌦️",
+      "Thunderstorm": "⛈️", "Snow": "❄️", "Mist": "🌫️", "Fog": "🌫️",
+      "Haze": "🌫️", "Smoke": "🌫️", "Dust": "🌫️", "Sand": "🌫️",
+      "Ash": "🌫️", "Squall": "💨", "Tornado": "🌪️"
+    } %}
+    <main class="shell">
+      <section class="panel forecast" aria-labelledby="city-title">
+        <a class="back-link" href="{{ url_for('home') }}">&larr; Change city</a>
+        <header class="hero">
+          <div>
+            <h1 id="city-title">{{ city_name }}</h1>
+            <p class="date">{{ current_date }}</p>
+          </div>
+          <span class="hero-icon" role="img" aria-label="{{ current_weather }}">{{ icons.get(current_weather, "🌡️") }}</span>
+        </header>
+
+        <div class="current">
+          <p class="temp">{{ current_temp }}<span class="unit">°C</span></p>
+          <p class="condition">{{ current_weather }}</p>
+          <dl class="stats">
+            <div><dt>High</dt><dd>{{ max_temp }}°</dd></div>
+            <div><dt>Low</dt><dd>{{ min_temp }}°</dd></div>
+            <div><dt>Wind</dt><dd>{{ wind_speed }} m/s</dd></div>
+          </dl>
+        </div>
+
+        {% if forecast %}
+        <h2>Five-day forecast</h2>
+        <ul class="forecast-list">
+          {% for item in forecast %}
+          <li>
+            <span class="day">{{ item.day }}</span>
+            <span class="icon" role="img" aria-label="{{ item.weather }}">{{ icons.get(item.weather, "🌡️") }}</span>
+            <span class="cond">{{ item.weather }}</span>
+            <span class="deg">{{ item.temp_c }}°</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>
