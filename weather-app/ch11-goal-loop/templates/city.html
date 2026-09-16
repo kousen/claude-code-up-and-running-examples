@@ -3,36 +3,112 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;800&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <title>{{ city_name }} Weather</title>
   </head>
   <body>
-    <main class="shell">
-      <section class="panel forecast" aria-labelledby="city-title">
-        <a class="back-link" href="{{ url_for('home') }}">Change city</a>
-        <h1 id="city-title">{{ city_name }}</h1>
-        <p class="date">{{ current_date }}</p>
+    {# Stroke icons keyed by OpenWeather's "main" condition. Anything not listed renders as text only. #}
+    {% set cloud = '<path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 9.1 4.5 4.5 0 0 0 7 18z"/>' %}
+    {% set fog = '<path d="M4 9h13M3 13h16M5 17h12"/>' %}
+    {% set icons = {
+      "Clear": ("Clear sky", '<circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>'),
+      "Clouds": ("Clouds", cloud),
+      "Rain": ("Rain", '<path d="M7 15h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 6.1 4.5 4.5 0 0 0 7 15zM8 18l-1 3M12 18l-1 3M16 18l-1 3"/>'),
+      "Drizzle": ("Drizzle", '<path d="M7 15h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 6.1 4.5 4.5 0 0 0 7 15zM9 19v1M13 19v1M17 19v1"/>'),
+      "Thunderstorm": ("Thunderstorm", '<path d="M7 14h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 5.1 4.5 4.5 0 0 0 7 14zM13 13l-2.5 4H14l-2.5 4"/>'),
+      "Snow": ("Snow", '<path d="M12 4v16M5 8l14 8M5 16l14-8M9 5l3 2 3-2M9 19l3-2 3 2"/>'),
+      "Mist": ("Mist", fog), "Smoke": ("Smoke", fog), "Haze": ("Haze", fog), "Dust": ("Dust", fog),
+      "Fog": ("Fog", fog), "Sand": ("Sand", fog), "Ash": ("Ash", fog), "Squall": ("Squall", fog),
+      "Tornado": ("Tornado", '<path d="M3 5h18M5 9h13M8 13h9M10 17h5M12 21h2"/>'),
+    } %}
+    {% macro icon(condition, size) -%}
+      {% set entry = icons.get(condition) %}
+      {% if entry -%}
+      <svg class="icon" width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="{{ entry[0] }}">{{ entry[1] | safe }}</svg>
+      {%- endif %}
+    {%- endmacro %}
 
-        <div class="current">
-          <p class="temp">{{ current_temp }} deg C</p>
-          <p>{{ current_weather }}</p>
-          <p>{{ min_temp }} to {{ max_temp }} deg C</p>
-          <p>{{ wind_speed }} meter/sec wind</p>
+    <main class="city">
+      <div class="topbar">
+        <a class="back-link" href="{{ url_for('home') }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          <span>Change city</span>
+        </a>
+        <div class="units" role="group" aria-label="Temperature unit">
+          <button type="button" data-unit="C" aria-pressed="true">°C</button>
+          <button type="button" data-unit="F" aria-pressed="false">°F</button>
         </div>
+      </div>
 
-        {% if forecast %}
-        <h2>Five-day forecast</h2>
+      <div>
+        <h1>{{ city_name }}</h1>
+        <p class="date">{{ current_date }}</p>
+      </div>
+
+      <div class="hero">
+        {{ icon(current_weather, 96) }}
+        <div>
+          <p class="temp">
+            <span class="temp-value" data-c="{{ current_temp }}" aria-hidden="true">{{ current_temp }}°</span>
+            <span class="visually-hidden temp-spoken" data-c="{{ current_temp }}">{{ current_temp }} deg C</span>
+          </p>
+          <p class="condition">{{ current_weather }}</p>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="card">
+          <span class="label">High / Low</span>
+          <span class="value"><span data-c="{{ max_temp }}">{{ max_temp }}°</span> / <span data-c="{{ min_temp }}">{{ min_temp }}°</span></span>
+        </div>
+        <div class="card">
+          <span class="label">Wind</span>
+          <span class="value">{{ wind_speed }} m/s</span>
+        </div>
+      </div>
+
+      {% if forecast %}
+      <section aria-labelledby="forecast-title">
+        <h2 id="forecast-title">Five-day forecast</h2>
         <ul class="forecast-list">
           {% for item in forecast %}
           <li>
-            <span>{{ item.day }}</span>
-            <span>{{ item.weather }}</span>
-            <span>{{ item.temp_c }} deg C</span>
+            <span class="day">{{ item.day }}</span>
+            <span class="cond">{{ icon(item.weather, 24) }}<span>{{ item.weather }}</span></span>
+            <span class="row-temp" data-c="{{ item.temp_c }}">{{ item.temp_c }}°</span>
           </li>
           {% endfor %}
         </ul>
-        {% endif %}
       </section>
+      {% endif %}
     </main>
+
+    <script>
+      (function () {
+        var buttons = document.querySelectorAll(".units button");
+        function apply(unit) {
+          document.querySelectorAll("[data-c]").forEach(function (el) {
+            var c = Number(el.dataset.c);
+            var value = unit === "F" ? Math.round(c * 9 / 5 + 32) : c;
+            el.textContent = el.classList.contains("temp-spoken") ? value + " deg " + unit : value + "°";
+          });
+          buttons.forEach(function (b) {
+            b.setAttribute("aria-pressed", String(b.dataset.unit === unit));
+          });
+        }
+        buttons.forEach(function (b) {
+          b.addEventListener("click", function () {
+            try { localStorage.setItem("unit", b.dataset.unit); } catch (e) {}
+            apply(b.dataset.unit);
+          });
+        });
+        var saved = null;
+        try { saved = localStorage.getItem("unit"); } catch (e) {}
+        apply(saved === "F" ? "F" : "C");
+      })();
+    </script>
   </body>
 </html>
