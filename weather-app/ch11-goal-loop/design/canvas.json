@@ -1,0 +1,15 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Today (baseline)", "x": 0, "y": 0, "w": 390, "h": 780 },
+    { "file": "DirectionA.dc.html", "title": "A: Night Sky", "x": 560, "y": 0, "w": 390, "h": 780 },
+    { "file": "DirectionB.dc.html", "title": "B: Warm Daylight", "x": 1120, "y": 0, "w": 390, "h": 780 },
+    { "file": "DirectionC.dc.html", "title": "C: Data First", "x": 1680, "y": 0, "w": 390, "h": 780 }
+  ],
+  "annotations": [
+    { "id": "note-baseline", "x": 0, "y": 820, "w": 390, "text": "TODAY, as shipped in Chapter 5.\nPalette: page #e7f0f2, panel #ffffff, text #172026, accent #175d74.\nNo icons. No unit toggle. Units spelled out as 'deg C'.\nLighthouse accessibility and best-practices already score 1.00, which is why the first goal we tried had nothing to check." },
+    { "id": "note-a", "x": 560, "y": 820, "w": 390, "text": "A: NIGHT SKY. Dark, one big number.\nPalette: bg #0f1a24, cards #172634, text #e8eef2, muted #9fb3c0, accent #f4b942 (the existing focus-ring color). Text on bg 14.6:1, muted 7.9:1, accent-on-bg 10.2:1.\nType: Manrope 800 for numbers, 500 for labels.\nLayout: hero temp + condition icon, two stat cards (high/low, wind), five-day as a vertical list of rows, one icon per row (same reading order as B).\nIcons: inline SVG, stroke style, each with role=img and aria-label naming the condition (Clear sky, Clouds, Rain).\nC/F toggle: segmented control top-right, 44px targets, aria-pressed; choice saved in localStorage and applied on reload.\nTradeoff: most new CSS; icons must map every OpenWeather condition or fall back to text." },
+    { "id": "note-b", "x": 1120, "y": 820, "w": 390, "text": "B: WARM DAYLIGHT. Keeps the card, changes the mood.\nPalette: page #fbf3e4, panel #fffdf8, highlight #fff1d6, border #e6d5b8, text #2b2118, muted #6b5a47, accent #c2410c / links #9a3412. Text on panel 14.9:1, muted 6.4:1.\nType: Source Serif 4 for the city name, temp, and headings; system sans for everything else.\nLayout: same one-card structure as today, current block gets an icon beside the temp, five-day stays a vertical list with a small icon per row.\nIcons: inline SVG with role=img and aria-label per condition.\nC/F toggle: a labeled switch under the current block ('Show Fahrenheit'); persists in localStorage.\nTradeoff: least change to the template, so least to break; also the least dramatic." },
+    { "id": "note-c", "x": 1680, "y": 820, "w": 390, "text": "C: DATA FIRST. Monospace, rules, no pictures.\nPalette: bg #f6f7f5, text #1a1c1a, muted #5b605c, rules #cfd3cf, one accent #175d74 (existing). Text 16.6:1, muted 6.6:1.\nType: IBM Plex Mono only.\nLayout: 2x2 grid of stats behind hairline rules, five-day as a ruled table.\nIcons: none on purpose. Conditions stay as text, so there is no alt-text to get wrong.\nC/F toggle: a plain 'Show °F' link that reloads with ?units=imperial; no persistence.\nTradeoff: the cheapest to build and to test; some readers will find it cold." }
+  ],
+  "launch": { "view": "canvas" }
+}
