@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+    a { color: #175d74; } a:hover { color: #0f4557; }
+  </style>
+</helmet>
+<div style="box-sizing: border-box; width: 390px; min-height: 760px; background: #e7f0f2; color: #172026; padding: 16px; display: flex; flex-direction: column;">
+  <section style="background: #ffffff; border: 1px solid #c9d7da; border-radius: 8px; padding: 20px; box-shadow: 0 16px 40px rgba(23,32,38,0.12); display: flex; flex-direction: column; gap: 0px;">
+    <a href="#" style="display: inline-block; margin-bottom: 16px; color: #175d74; font-weight: 700; text-decoration: underline; font-size: 16px;">Change city</a>
+    <h1 style="margin: 0 0 16px 0; font-size: 40px; line-height: 1.1; font-weight: 700;">Boston</h1>
+    <p style="margin: 0 0 16px 0; color: #486168; font-size: 16px;">Wednesday, September 16</p>
+    <div style="display: flex; flex-direction: column; gap: 8px; padding: 16px; background: #eef6f7; border-radius: 6px;">
+      <p style="margin: 0; font-size: 32px; font-weight: 800;">26 deg C</p>
+      <p style="margin: 0; font-size: 16px;">Clear</p>
+      <p style="margin: 0; font-size: 16px;">12 to 26 deg C</p>
+      <p style="margin: 0; font-size: 16px;">0.894 meter/sec wind</p>
+    </div>
+    <h2 style="margin: 32px 0 16px 0; font-size: 24px; font-weight: 700;">Five-day forecast</h2>
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #d4e0e3; border-radius: 6px; font-size: 16px;"><span>Wed</span><span>Clouds</span><span>25 deg C</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #d4e0e3; border-radius: 6px; font-size: 16px;"><span>Thu</span><span>Clouds</span><span>26 deg C</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #d4e0e3; border-radius: 6px; font-size: 16px;"><span>Fri</span><span>Rain</span><span>22 deg C</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #d4e0e3; border-radius: 6px; font-size: 16px;"><span>Sat</span><span>Clear</span><span>24 deg C</span></div>
+      <div style="display: flex; flex-direction: column; gap: 4px; padding: 12px; border: 1px solid #d4e0e3; border-radius: 6px; font-size: 16px;"><span>Sun</span><span>Clouds</span><span>23 deg C</span></div>
+    </div>
+  </section>
+</div>
+</x-dc>
+</body>
+</html>

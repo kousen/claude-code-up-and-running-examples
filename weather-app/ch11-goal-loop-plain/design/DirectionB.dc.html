@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+  <style>
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+    a { color: #9a3412; } a:hover { color: #7c2d12; }
+  </style>
+</helmet>
+<div style="box-sizing: border-box; width: 390px; min-height: 760px; background: #fbf3e4; color: #2b2118; padding: 16px; display: flex; flex-direction: column;">
+  <section style="background: #fffdf8; border: 1px solid #e6d5b8; border-radius: 8px; padding: 20px; box-shadow: 0 16px 40px rgba(43,33,24,0.10); display: flex; flex-direction: column; gap: 20px;">
+    <a href="#" style="color: #9a3412; font-weight: 700; font-size: 16px; text-decoration: underline; align-self: flex-start;">Change city</a>
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <h1 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 40px; line-height: 1.1; font-weight: 700;">Boston</h1>
+      <p style="margin: 0; color: #6b5a47; font-size: 16px;">Wednesday, September 16</p>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px; padding: 16px; background: #fff1d6; border-radius: 6px;">
+      <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Clear sky"><circle cx="12" cy="12" r="4.5"></circle><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"></path></svg>
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <p style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 700; line-height: 1;">26°C</p>
+        <p style="margin: 0; font-size: 16px; font-weight: 700;">Clear</p>
+        <p style="margin: 0; font-size: 15px; color: #6b5a47;">12° to 26°, wind 0.9 m/s</p>
+      </div>
+    </div>
+    <label style="display: flex; align-items: center; gap: 12px; font-size: 16px; min-height: 44px; cursor: pointer;">
+      <span style="width: 52px; height: 30px; border-radius: 999px; background: #e6d5b8; position: relative; display: inline-block;"><span style="position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fffdf8; box-shadow: 0 1px 3px rgba(43,33,24,0.3);"></span></span>
+      <span>Show Fahrenheit</span>
+    </label>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 24px; font-weight: 700;">Five-day forecast</h2>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: 12px; padding: 12px; border: 1px solid #e6d5b8; border-radius: 6px; font-size: 16px;">
+          <span style="font-weight: 700;">Wed</span>
+          <span style="display: flex; align-items: center; gap: 8px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b5a47" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Clouds"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 9.1 4.5 4.5 0 0 0 7 18z"></path></svg><span>Clouds</span></span>
+          <span style="text-align: right;">25°C</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: 12px; padding: 12px; border: 1px solid #e6d5b8; border-radius: 6px; font-size: 16px;">
+          <span style="font-weight: 700;">Thu</span>
+          <span style="display: flex; align-items: center; gap: 8px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b5a47" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Clouds"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 9.1 4.5 4.5 0 0 0 7 18z"></path></svg><span>Clouds</span></span>
+          <span style="text-align: right;">26°C</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: 12px; padding: 12px; border: 1px solid #e6d5b8; border-radius: 6px; font-size: 16px;">
+          <span style="font-weight: 700;">Fri</span>
+          <span style="display: flex; align-items: center; gap: 8px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b5a47" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Rain"><path d="M7 15h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 6.1 4.5 4.5 0 0 0 7 15zM8 18l-1 3M12 18l-1 3M16 18l-1 3"></path></svg><span>Rain</span></span>
+          <span style="text-align: right;">22°C</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: 12px; padding: 12px; border: 1px solid #e6d5b8; border-radius: 6px; font-size: 16px;">
+          <span style="font-weight: 700;">Sat</span>
+          <span style="display: flex; align-items: center; gap: 8px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Clear sky"><circle cx="12" cy="12" r="4"></circle><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"></path></svg><span>Clear</span></span>
+          <span style="text-align: right;">24°C</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: center; gap: 12px; padding: 12px; border: 1px solid #e6d5b8; border-radius: 6px; font-size: 16px;">
+          <span style="font-weight: 700;">Sun</span>
+          <span style="display: flex; align-items: center; gap: 8px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6b5a47" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Clouds"><path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 9.1 4.5 4.5 0 0 0 7 18z"></path></svg><span>Clouds</span></span>
+          <span style="text-align: right;">23°C</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+</body>
+</html>

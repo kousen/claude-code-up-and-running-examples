@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;800&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>{{ city_name }} Weather</title>
+  </head>
+  {# Night Sky (design/DirectionA.dc.html). Icons are inline stroke SVGs keyed by the
+     OpenWeather "main" condition; anything unmapped falls back to plain text. #}
+  {% set icons = {
+    "Clear": ("Clear sky", '<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/>'),
+    "Clouds": ("Clouds", '<path d="M7 18h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 9.1 4.5 4.5 0 0 0 7 18z"/>'),
+    "Rain": ("Rain", '<path d="M7 15h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 6.1 4.5 4.5 0 0 0 7 15zM8 18l-1 3M12 18l-1 3M16 18l-1 3"/>'),
+    "Drizzle": ("Drizzle", '<path d="M7 15h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 6.1 4.5 4.5 0 0 0 7 15zM9 18v2M14 18v2"/>'),
+    "Snow": ("Snow", '<path d="M7 15h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 6.1 4.5 4.5 0 0 0 7 15zM8 18h.01M12 18h.01M16 18h.01M10 21h.01M14 21h.01"/>'),
+    "Thunderstorm": ("Thunderstorm", '<path d="M7 15h10a4 4 0 0 0 .5-7.97A6 6 0 0 0 6.2 6.1 4.5 4.5 0 0 0 7 15zM13 14l-2 4h3l-2 4"/>'),
+    "Mist": ("Mist", '<path d="M4 9h16M4 13h12M4 17h16"/>'),
+    "Fog": ("Fog", '<path d="M4 9h16M4 13h12M4 17h16"/>'),
+    "Haze": ("Haze", '<path d="M4 9h16M4 13h12M4 17h16"/>'),
+  } %}
+  {% macro icon(condition, size, stroke) -%}
+    {%- if condition in icons -%}
+    <svg width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" fill="none" stroke="{{ stroke }}" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="{{ icons[condition][0] }}">{{ icons[condition][1] | safe }}</svg>
+    {%- endif -%}
+  {%- endmacro %}
+  <body class="night">
+    <main class="sky">
+      <header class="topbar">
+        <a class="back-link" href="{{ url_for('home') }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          <span>Change city</span>
+        </a>
+        <div class="unit-toggle" role="group" aria-label="Temperature unit">
+          <button type="button" data-unit="C" aria-pressed="true">°C</button>
+          <button type="button" data-unit="F" aria-pressed="false">°F</button>
+        </div>
+      </header>
+
+      <div class="heading">
+        <h1 id="city-title">{{ city_name }}</h1>
+        <p class="date">{{ current_date }}</p>
+      </div>
+
+      <section class="hero" aria-labelledby="city-title">
+        {{ icon(current_weather, 96, "#f4b942") }}
+        <div>
+          <p class="temp"><span aria-hidden="true"><span data-c="{{ current_temp }}">{{ current_temp }}</span>°</span><span class="sr-only" data-sr="{{ current_temp }}">{{ current_temp }} deg C</span></p>
+          <p class="condition">{{ current_weather }}</p>
+        </div>
+      </section>
+
+      <div class="stats">
+        <div class="card">
+          <span class="label">High / Low</span>
+          <span class="value"><span data-c="{{ max_temp }}">{{ max_temp }}</span>° / <span data-c="{{ min_temp }}">{{ min_temp }}</span>°</span>
+        </div>
+        <div class="card">
+          <span class="label">Wind</span>
+          <span class="value">{{ wind_speed }} m/s</span>
+        </div>
+      </div>
+
+      {% if forecast %}
+      <section class="forecast" aria-labelledby="forecast-title">
+        <h2 id="forecast-title">Five-day forecast</h2>
+        <ul class="forecast-list">
+          {% for item in forecast %}
+          <li class="card">
+            <span class="day">{{ item.day }}</span>
+            <span class="cond">{{ icon(item.weather, 24, "#f4b942" if item.weather == "Clear" else "#e8eef2") }}<span>{{ item.weather }}</span></span>
+            <span class="value"><span data-c="{{ item.temp_c }}">{{ item.temp_c }}</span>°</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+    </main>
+    <script>
+      (function () {
+        var buttons = document.querySelectorAll(".unit-toggle button");
+        function apply(unit) {
+          document.querySelectorAll("[data-c]").forEach(function (el) {
+            var c = Number(el.dataset.c);
+            el.textContent = unit === "F" ? Math.round(c * 9 / 5 + 32) : c;
+          });
+          document.querySelectorAll("[data-sr]").forEach(function (el) {
+            var c = Number(el.dataset.sr);
+            el.textContent = (unit === "F" ? Math.round(c * 9 / 5 + 32) : c) + " deg " + unit;
+          });
+          buttons.forEach(function (b) {
+            b.setAttribute("aria-pressed", String(b.dataset.unit === unit));
+          });
+          try { localStorage.setItem("unit", unit); } catch (e) {}
+        }
+        buttons.forEach(function (b) {
+          b.addEventListener("click", function () { apply(b.dataset.unit); });
+        });
+        var saved = null;
+        try { saved = localStorage.getItem("unit"); } catch (e) {}
+        apply(saved === "F" ? "F" : "C");
+      })();
+    </script>
+  </body>
+</html>

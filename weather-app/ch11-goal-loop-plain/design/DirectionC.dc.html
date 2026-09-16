@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
+  <style>
+    body { margin: 0; font-family: "IBM Plex Mono", "SF Mono", Menlo, monospace; }
+    a { color: #175d74; } a:hover { color: #0f4557; }
+  </style>
+</helmet>
+<div style="box-sizing: border-box; width: 390px; min-height: 760px; background: #f6f7f5; color: #1a1c1a; padding: 24px 20px; display: flex; flex-direction: column; gap: 24px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; min-height: 44px;">
+    <a href="#" style="color: #175d74; font-size: 14px; text-decoration: underline;">← Change city</a>
+    <a href="#" style="color: #175d74; font-size: 14px; text-decoration: underline;">Show °F</a>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 6px; border-bottom: 2px solid #1a1c1a; padding-bottom: 16px;">
+    <h1 style="margin: 0; font-size: 28px; font-weight: 600; line-height: 1.1;">BOSTON</h1>
+    <p style="margin: 0; color: #5b605c; font-size: 13px;">WED 16 SEP</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0px; border: 1px solid #1a1c1a;">
+    <div style="padding: 14px; border-right: 1px solid #1a1c1a; border-bottom: 1px solid #1a1c1a; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #5b605c;">NOW</span><span style="font-size: 40px; font-weight: 600; line-height: 1;">26°C</span></div>
+    <div style="padding: 14px; border-bottom: 1px solid #1a1c1a; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #5b605c;">SKY</span><span style="font-size: 20px; font-weight: 600; line-height: 1.2;">Clear</span></div>
+    <div style="padding: 14px; border-right: 1px solid #1a1c1a; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #5b605c;">HIGH / LOW</span><span style="font-size: 20px; font-weight: 600;">26° / 12°</span></div>
+    <div style="padding: 14px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 12px; color: #5b605c;">WIND</span><span style="font-size: 20px; font-weight: 600;">0.9 m/s</span></div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <h2 style="margin: 0; font-size: 12px; font-weight: 600; color: #5b605c; letter-spacing: 0.08em;">FIVE-DAY FORECAST</h2>
+    <div style="display: flex; flex-direction: column; gap: 0px; border-top: 1px solid #1a1c1a;">
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 12px 0; border-bottom: 1px solid #cfd3cf; font-size: 15px;"><span style="font-weight: 600;">WED</span><span>Clouds</span><span style="text-align: right;">25°C</span></div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 12px 0; border-bottom: 1px solid #cfd3cf; font-size: 15px;"><span style="font-weight: 600;">THU</span><span>Clouds</span><span style="text-align: right;">26°C</span></div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 12px 0; border-bottom: 1px solid #cfd3cf; font-size: 15px;"><span style="font-weight: 600;">FRI</span><span>Rain</span><span style="text-align: right;">22°C</span></div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 12px 0; border-bottom: 1px solid #cfd3cf; font-size: 15px;"><span style="font-weight: 600;">SAT</span><span>Clear</span><span style="text-align: right;">24°C</span></div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 12px 0; border-bottom: 1px solid #1a1c1a; font-size: 15px;"><span style="font-weight: 600;">SUN</span><span>Clouds</span><span style="text-align: right;">23°C</span></div>
+    </div>
+  </div>
+  <p style="margin: 0; font-size: 12px; color: #5b605c;">Source: OpenWeather One Call 3.0</p>
+</div>
+</x-dc>
+</body>
+</html>
