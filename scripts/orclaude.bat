@@ -4,6 +4,10 @@ if not defined OPENROUTER_API_KEY (
     echo Set OPENROUTER_API_KEY in your environment >&2
     exit /b 1
 )
+if "%~1"=="" (
+    echo Usage: orclaude ^<vendor/model-slug^> [claude args...]  (no model given; refusing to fall back to a default^) >&2
+    exit /b 1
+)
 set "MODEL=%~1"
 set "ANTHROPIC_BASE_URL=https://openrouter.ai/api"
 set "ANTHROPIC_AUTH_TOKEN=%OPENROUTER_API_KEY%"

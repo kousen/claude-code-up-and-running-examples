@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run Claude Code against any OpenRouter model: orclaude <vendor/model-slug> [claude args...]
 : "${OPENROUTER_API_KEY:?Set OPENROUTER_API_KEY in your shell profile, such as ~/.zshrc}"
-MODEL="$1"
+MODEL="${1:?Usage: orclaude <vendor/model-slug> [claude args...]  (no model given; refusing to fall back to a default)}"
 shift
 export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
 export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"
