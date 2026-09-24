@@ -9,7 +9,7 @@ description: |
   "disk activity", "what processes are running", "file changes", "browser
   extensions", "Docker containers", "startup programs", "file hash",
   "installed apps", "what runs at boot".
-allowed-tools: Bash
+allowed-tools: Bash(osqueryi *)
 ---
 
 # Osquery System Diagnostics Skill
