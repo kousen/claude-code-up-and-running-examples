@@ -5,6 +5,7 @@
     "ANTHROPIC_AUTH_TOKEN": "sk-or-v1-...",
     "ANTHROPIC_API_KEY": "",
     "ANTHROPIC_MODEL": "<vendor/model-slug>",
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "<vendor/model-slug>",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "<vendor/model-slug>",
     "ANTHROPIC_DEFAULT_SONNET_MODEL": "<vendor/model-slug>",
     "ANTHROPIC_DEFAULT_HAIKU_MODEL": "<vendor/model-slug>",
