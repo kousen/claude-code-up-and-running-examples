@@ -1,0 +1,4 @@
+{
+  "description": "The force-push-guard hooks module",
+  "modules": ["./register.js"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "force-push-guard",
+  "version": "0.1.0",
+  "description": "Refuses git push --force before it runs",
+  "author": { "name": "Ken Kousen" }
+}
